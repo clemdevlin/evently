@@ -24,8 +24,8 @@ export default async function RootLayout({
         clerkId: user.id,
         email: user.emailAddresses[0]?.emailAddress,
         username: user.username || user.firstName || "",
-        firstName: user.firstName || "",
-        lastName: user.lastName || "",
+        firstName: user.firstName || "Random",
+        lastName: user.lastName || "User",
         photo: user.imageUrl,
       });
     }
