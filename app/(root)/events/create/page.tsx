@@ -1,22 +1,30 @@
-import EventForm from "@/components/shared/EventForm"
-import { auth } from "@clerk/nextjs";
+import EventForm from "@/components/shared/EventForm";
+import { auth, clerkClient } from "@clerk/nextjs";
 
-const CreateEvent = () => {
-  const { sessionClaims } = auth();
+const CreateEvent = async () => {
+  const { sessionClaims, userId: userIdD } = auth();
+  console.log("Session Claims:", { sessionClaims, userIdD });
 
-  const userId = sessionClaims?.userId as string;
+  const user = await clerkClient.users.getUser(userIdD!);
+
+  console.log("User:", user);
+
+  const userId = user?.publicMetadata?.userId as string;
+  console.log("User ID in CreateEvent page:", userId);
 
   return (
     <>
       <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
-        <h3 className="wrapper h3-bold text-center sm:text-left">Create Event</h3>
+        <h3 className="wrapper h3-bold text-center sm:text-left">
+          Create Event
+        </h3>
       </section>
 
       <div className="wrapper my-8">
-        <EventForm userId={userId} type="Create" />
+        <EventForm userId={userId as string} type="Create" />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default CreateEvent
+export default CreateEvent;
