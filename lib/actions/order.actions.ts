@@ -43,11 +43,7 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
       cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
     });
 
-    if (process.env.NODE_ENV !== "production") {
-      return { url: session.url };
-    }
-
-    redirect(session.url!);
+    return { url: session.url };
   } catch (error) {
     handleError(error);
     throw error;
