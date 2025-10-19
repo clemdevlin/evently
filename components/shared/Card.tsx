@@ -16,7 +16,6 @@ const Card = async ({ event, hasOrderLink, hidePrice }: CardProps) => {
   const { sessionClaims } = auth();
 
   const { userId } = sessionClaims?.userId as { userId: string };
-  console.log("EVENT CARD RENDERING", userId);
 
   if (!userId) {
     return null;
