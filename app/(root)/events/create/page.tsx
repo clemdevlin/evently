@@ -1,10 +1,9 @@
 import EventForm from "@/components/shared/EventForm";
-import { auth, clerkClient } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs";
 
 const CreateEvent = async () => {
   const { sessionClaims } = auth();
-  const user = await clerkClient.users.getUser(sessionClaims?.sub!);
-  const userId = user?.publicMetadata?.userId as string;
+  const { userId } = sessionClaims?.userId as { userId: string };
 
   return (
     <>
