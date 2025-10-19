@@ -25,7 +25,7 @@ export default async function RootLayout({
         email: user.emailAddresses[0]?.emailAddress,
         username: user.username || user.firstName || "",
         firstName: user.firstName || "Random",
-        lastName: user.lastName || "User",
+        lastName: user.lastName || "",
         photo: user.imageUrl,
       });
     }

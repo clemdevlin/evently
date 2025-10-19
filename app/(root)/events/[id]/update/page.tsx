@@ -1,6 +1,6 @@
 import EventForm from "@/components/shared/EventForm";
 import { getEventById } from "@/lib/actions/event.actions";
-import { auth, clerkClient } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs";
 
 type UpdateEventProps = {
   params: {
@@ -11,9 +11,7 @@ type UpdateEventProps = {
 const UpdateEvent = async ({ params: { id } }: UpdateEventProps) => {
   const { sessionClaims } = auth();
 
-  const user = await clerkClient.users.getUser(sessionClaims?.sub!);
-
-  const userId = user?.publicMetadata?.userId as string;
+  const { userId } = sessionClaims?.userId as { userId: string };
 
   // const userId = sessionClaims?.userId as string;
   const event = await getEventById(id);
