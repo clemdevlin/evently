@@ -4,6 +4,9 @@ import { auth } from "@clerk/nextjs";
 const CreateEvent = async () => {
   const { sessionClaims } = auth();
   const { userId } = sessionClaims?.userId as { userId: string };
+  if (!userId) {
+    return <p className="wrapper py-10 text-center">Unauthorized</p>;
+  }
 
   return (
     <>

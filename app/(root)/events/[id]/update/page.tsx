@@ -13,6 +13,10 @@ const UpdateEvent = async ({ params: { id } }: UpdateEventProps) => {
 
   const { userId } = sessionClaims?.userId as { userId: string };
 
+  if (!userId) {
+    return <p className="wrapper py-10 text-center">Unauthorized</p>;
+  }
+
   // const userId = sessionClaims?.userId as string;
   const event = await getEventById(id);
 
